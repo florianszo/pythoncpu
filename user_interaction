@@ -1,0 +1,77 @@
+""" CPU Monitoring System - Aufgabe; Übertragen der CPU Auslastung in SQL
+   
+
+       Aufgabenname:            aufgabe_ls3_02 (python)
+
+            Gruppe: Spiertz, Marcel  ; Szoszynski, Florian
+
+
+    """
+#imports definieren
+
+import sys
+import cpuData as cpu
+
+#Nutzerabfrage 
+def userDeclaration():
+    print("Wählen Sie eine Aktion")
+    print("1: Datenbankinhalte der CPU Infos anzeigen")
+    print("2: Exportieren von Daten aus der Datenbank")
+    print("3: Datenbankinhalte löschen")
+    print("0: Exit")
+
+#Nutzer-Input
+    userInput = input()
+    return userInput
+
+#Ereignis: Nutzer hat falsche Eingabe getätigt
+def userDeclarations(stri):
+    if stri == "a":
+        print("Ihre Eingabe ist falsch. ERNEUT VERSUCHEN!")
+        #erneuter User-Input
+        userDeclaration()
+
+def userEvaluation():
+    #Erneute Auswahldefinition
+    while True:
+        #Was möchte der Nutzer mit seiner angabe
+        ergAbfrage = userDeclaration()
+        if ergAbfrage == "1":
+            showEvaluations()
+        elif ergAbfrage == "2":
+            cpu.exportDatenbank()
+        elif ergAbfrage == "3":
+            cpu.delteDatabaseInfo()
+        elif ergAbfrage == "0":
+            sys.exit("")
+        else:
+            userDeclarations("a")
+            
+
+#Nutzerabfrage der Anzuzeigenden Daten
+def showEvaluations():
+    print("Wählen Sie eine Aktion")
+    print("1: Auslastung in %")
+    print("2: Taktfrequenz Anzeigen")
+    print("3: CPU Werte Anzeigen")
+    print("0: Alle Infos anzeigen")
+
+    userInput = input()
+
+    #User-Input Nummerndeklaration
+    if userInput == "1":
+        cpu.cpuPerformance()
+    elif userInput == "2":
+        cpu.cpuFreq()
+    elif userInput == "3":
+        cpu.cpuStats()
+    elif userInput == "0":
+        cpu.cpuAlleData()
+    else:
+        userDeclarations("a")
+
+
+
+            
+            
+
