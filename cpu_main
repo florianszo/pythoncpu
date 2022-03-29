@@ -1,0 +1,37 @@
+""" CPU Monitoring System - Aufgabe; Übertragen der CPU Auslastung in SQL
+   
+
+       Aufgabenname:            aufgabe_ls3_02 (python)
+
+            Gruppe: Spiertz, Marcel  ; Szoszynski, Florian
+
+
+    """
+
+#Importieren 
+import userInteractionData as userData
+import cpuData as cpu
+import threading as the
+
+#Main-Funktion
+def startCPUcon():
+
+    #Threads definieren  
+    t1 = the.Thread(target=cpuInfo)
+    t2 = the.Thread(target=evaluation)
+
+    #starten der Threads
+    t1.start()
+    t2.start()
+
+#Erster Prozess CPU infos auslesen
+def cpuInfo():
+    cpu.writeStats()
+
+#Nutzer abfrage was geschehen soll
+def evaluation():
+    userData.userEvaluation()
+
+#definition Main
+if __name__ == '__main__':
+    startCPUcon()
